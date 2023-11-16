@@ -1,0 +1,106 @@
+<!-- Licensed under a BSD license. See license.html for license -->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			/* overflow: auto; */
+			background: #fff;
+
+		}
+		canvas {
+			
+			width: 800px;
+			height: 500px;
+			margin: 2px;
+			border: 1px solid black;
+			background-color: black;
+		}
+	</style>
+	<script src="./decoder_def.js"></script>
+	<script src="./jadecoder.js"></script>
+	<script src="./hevcdec.js"></script>
+	<script src="./glutils.js"></script>
+	<script src="./connector.js"></script>
+	<!-- <script src="./audioplay.js"></script> -->
+	<script>
+	</script>
+</head>
+
+<body onload="init();">
+	<span>deviceID：</span>
+	<input type="text" id="dev_id" value="">
+	<span>User：</span>
+	<input type="text" id="user" value="admin">
+	<span>password：</span>
+	<input type="text" id="pwd">
+	<br />
+	<span>Live</span>
+	<br />
+	<button onclick="connect()" style="width:100px">connect</button>
+	<button onclick="disconnect()" style="width:100px">disconnect</button>
+	<button onclick="openvideo()" style="width:100px">open Stream</button>
+	<button onclick="closevideo()" style="width:100px">close stream </button>
+	<hr>
+	<table style="border:0px; width:120px">
+		<tr>
+			<td>
+				<canvas id="canvas1" width="702" height="576" style="background-color: red;"></canvas>
+			</td>
+		</tr>
+	</table>
+
+
+</body>
+<script src="./play.js"></script>
+<script src="./g711a_al.js"></script>
+
+<script>
+	let devid;
+	//Initialize canvas player
+	async function init() {
+		let canvas = document.getElementById("canvas1")
+		Player.init([canvas]);
+		window.onorientationchange = function() {
+          alert(1)
+        };
+		await connect('5590533608','admin','gvn8yt>i4x')
+		// setTimeout(await openvideo(), 50000);
+	}
+
+	function connect(devid,user,pwd ) {
+		// var devid = document.getElementById("dev_id").value;
+		// var user = document.getElementById("user").value;
+		// var pwd = document.getElementById("pwd").value;
+		// var streamid = parseInt(document.getElementById("streamtype").value);
+		// var channel = parseInt(document.getElementById("channel").value);
+		devid = devid
+		Player.ConnectDevice(devid, '', user, pwd, 0, 1000, 0, 0, 0)
+		// Player.ConnectDevice('4664460941', '192.168.43.100', '919007048223', 'Admin@123', 0, 80, 0, channel, streamid)
+	}
+	function disconnect(params) {
+		// var devid = document.getElementById("dev_id").value;
+		Player.DisConnectDevice(devid)
+	}
+
+	function openvideo() {
+		// var streamid = parseInt(document.getElementById("streamtype").value);
+		// var channel = parseInt(document.getElementById("channel").value);
+		// document.getElementById("channel").disabled = true;
+		console.log("channel")
+		var devid = document.getElementById("dev_id").value;
+		Player.OpenStream(devid, '', 0, 1, 0);
+	}
+
+	function closevideo() {	
+		Player.CloseStream(0)
+	}
+</script>
+
+</html>
