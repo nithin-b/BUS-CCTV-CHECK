@@ -4465,7 +4465,7 @@
           console.log(useHttps);
           console.log("================================");
           // var o = (i ? "wss" : "ws") + "://" + t + ":" + n;
-          var o = (!useHttps ? "wss" : "ws") + "://" + t + ":" + n;
+          var o = (useHttps ? "wss" : "ws") + "://" + t + ":" + n;
           console.log(o);
           var a = {
             key: e,
