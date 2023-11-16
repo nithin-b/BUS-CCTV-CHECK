@@ -4459,7 +4459,13 @@
           (l.onopen = e), (l.onclose = t), (l.onerror = n), (l.ondata = r);
         }),
         (l.connect = function (e, t, n, r, i) {
-          var o = (i ? "wss" : "ws") + "://" + t + ":" + n;
+          var useHttps =
+            window.location.protocol == "http:" ? "http://" : "https://";
+          console.log("Checking using http or https for web socket........");
+          console.log(useHttps);
+          console.log("================================");
+          // var o = (i ? "wss" : "ws") + "://" + t + ":" + n;
+          var o = (!useHttps ? "wss" : "ws") + "://" + t + ":" + n;
           console.log(o);
           var a = {
             key: e,
@@ -5771,8 +5777,13 @@
                       200 != t.status &&
                       A.onconnect(e, e.ctx, -12);
                 };
-                var n = "http://";
-                e.usehttps && (n = "https://"),
+                var useHttp =
+                  window.location.protocol == "http:" ? "http://" : "https://";
+                console.log("Checking using http or https........");
+                console.log(useHttp);
+                console.log("================================");
+                var n = useHttp;
+                e.usehttps && (n = useHttp),
                   t.open(
                     "GET",
                     n +

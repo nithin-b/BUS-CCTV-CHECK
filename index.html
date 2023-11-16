@@ -70,6 +70,17 @@
 		window.onorientationchange = function() {
           alert(1)
         };
+
+		// Detect protocol from the current page's URL
+		const currentProtocol = window.location.protocol;
+		if (currentProtocol === 'https:') {
+			console.log('Current page is using HTTPS.');
+		} else if (currentProtocol === 'http:') {
+			console.log('Current page is using HTTP.');
+		} else {
+			console.log('The protocol is neither HTTP nor HTTPS.');
+		}
+		
 		await connect('5590533608','admin','gvn8yt>i4x')
 		// setTimeout(await openvideo(), 50000);
 	}
