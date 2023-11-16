@@ -4459,13 +4459,12 @@
           (l.onopen = e), (l.onclose = t), (l.onerror = n), (l.ondata = r);
         }),
         (l.connect = function (e, t, n, r, i) {
-          var useHttps =
-            window.location.protocol == "http:" ? "http://" : "https://";
+          var useHttps = window.location.protocol == "https://" ? true : false;
           console.log("Checking using http or https for web socket........");
           console.log(useHttps);
           console.log("================================");
           // var o = (i ? "wss" : "ws") + "://" + t + ":" + n;
-          var o = (useHttps ? "ws" : "wss") + "://" + t + ":" + n;
+          var o = (useHttps ? "wss" : "ws") + "://" + t + ":" + n;
           console.log(o);
           var a = {
             key: e,
